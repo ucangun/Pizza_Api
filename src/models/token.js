@@ -7,7 +7,7 @@ const { Schema, model } = require("mongoose");
 /* ------------------------------------------------------- */
 // Token Model:
 
-const TokenSchema = new mongoose.Schema(
+const TokenSchema = new Schema(
   {
     userId: {
       type: Schema.Types.ObjectId,
