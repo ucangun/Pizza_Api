@@ -81,7 +81,7 @@ module.exports = {
     res.status(200).send({
       error: false,
       result,
-      new: await User.findOne({ _id: req.params.id }),
+      new: true,
     });
   },
 

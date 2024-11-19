@@ -4,6 +4,7 @@
 ------------------------------------------------------- */
 const { mongoose } = require("../configs/dbConnection");
 const { Schema, model } = require("mongoose");
+const passwordEncrypt = require("../helpers/passwordEncrypt");
 
 /* ------------------------------------------------------- */
 
