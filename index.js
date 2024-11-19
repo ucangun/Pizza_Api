@@ -77,6 +77,9 @@ app.use("/toppings", require("./src/routes/topping"));
 // Pizza
 app.use("/pizzas", require("./src/routes/pizza"));
 
+// Orders
+app.use("/orders", require("./src/routes/order"));
+
 /* ------------------------------------------------------- */
 
 // errorHandler:
