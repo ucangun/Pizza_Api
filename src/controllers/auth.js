@@ -25,14 +25,14 @@ module.exports = {
   login: async (req, res) => {
     const { userName, password, email } = req.body;
 
-    if (!(email || userName) && password) {
+    if (!((userName || email) && password)) {
       res.errorStatusCode = 401;
       throw new Error("UserName/Email and Password required!");
     }
 
     const user = await User.findOne({ $or: [{ userName }, { email }] });
 
-    if (user?.password !== passwordEncrypt(password)) {
+    if (!user || user?.password !== passwordEncrypt(password)) {
       res.errorStatusCode = 401;
       throw new Error("Invalid Credentials!");
     }
@@ -67,7 +67,7 @@ module.exports = {
     const tokenKey = auth ? auth.split(" ") : null; // [ "Token", tokenKey]
     const result = await Token.deleteOne({ token: tokenKey[1] });
 
-    res.send({
+    res.status(200).send({
       error: false,
       message: "Token deleted.",
       result,
