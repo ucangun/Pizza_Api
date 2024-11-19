@@ -7,12 +7,13 @@ const { Schema, model } = require("mongoose");
 /* ------------------------------------------------------- */
 // Token Model:
 
-const TokenSchema = new Schema(
+const TokenSchema = new mongoose.Schema(
   {
     userId: {
       type: Schema.Types.ObjectId,
-      ref: "Personnel",
+      ref: "User",
       required: true,
+      unique: true,
       index: true,
     },
 
@@ -24,10 +25,7 @@ const TokenSchema = new Schema(
       index: true,
     },
   },
-  {
-    collection: "tokens",
-    timestamps: true,
-  }
+  { collection: "tokens", timestamps: true }
 );
 
 /* ------------------------------------------------------- */
