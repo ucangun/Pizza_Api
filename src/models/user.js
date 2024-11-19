@@ -41,7 +41,7 @@ const userSchema = new Schema(
       default: false,
     },
   },
-  { timestamps: "true", collection: "users" }
+  { timestamps: true, collection: "users" }
 );
 
 module.exports = model("User", userSchema);
