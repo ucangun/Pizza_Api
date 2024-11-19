@@ -4,8 +4,24 @@
 ------------------------------------------------------- */
 
 const passwordEncrypt = require("../helpers/passwordEncrypt");
+const User = require("../models/user");
+const Token = require("../models/token");
 
 module.exports = {
+  /*
+            #swagger.tags = ["Authentication"]
+            #swagger.summary = "Login"
+            #swagger.description = 'Login with username (or email) and password for get simpleToken and JWT'
+            #swagger.parameters["body"] = {
+                in: "body",
+                required: true,
+                schema: {
+                    "username": "test",
+                    "password": "aA?123456",
+                }
+            }
+   */
+
   login: async (req, res) => {
     const { userName, password, email } = req.body;
 
@@ -41,5 +57,20 @@ module.exports = {
     });
   },
 
-  logout: async (req, res) => {},
+  logout: async (req, res) => {
+    /*
+        #swagger.tags = ["Tokens"]
+        #swagger.summary = "Create Token"
+    */
+
+    const auth = req.headers?.authorization; //"Token fgdgfhg623gjhbksj"
+    const tokenKey = auth ? auth.split(" ") : null; // [ "Token", tokenKey]
+    const result = await Token.deleteOne({ token: tokenKey[1] });
+
+    res.send({
+      error: false,
+      message: "Token deleted.",
+      result,
+    });
+  },
 };
